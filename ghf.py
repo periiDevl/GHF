@@ -24,7 +24,7 @@ clicked = False
 running = True
 trigger = True
 mp = (0, 0)
-def button(text = "hello",x=600, y=30, width=60, height=30, font_size=35,curve = 8, outline = 1 ,color = (0, 200, 0), hover = (0, 250, 0), cli = (0, 100, 0)):
+def button(text = "hello",x=600, y=30, width=60, height=30, font_size=35,curve = 8, outline = 1 ,color = (0, 200, 0), hover = (0, 230, 0), cli = (0, 130, 0)):
     global trigger
     font1 = pygame.font.Font('Smokind-lg2Kd.otf', font_size)
     text1 = font1.render(text, True, (255, 255, 255))
