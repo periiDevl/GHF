@@ -1,65 +1,89 @@
-# import the pygame module
 import pygame
 
-# Define the background colour
-# using RGB color coding.
+pygame.font.init()
+ 
+pygame.font.get_init()
+
+
+ 
+ 
+
+ 
+
+
 background_colour = (50, 50, 50)
 
-# Define the dimensions of
-# screen object(width,height)
-screen = pygame.display.set_mode((500, 500))
+screen = pygame.display.set_mode((1200, 800))
 
-# Set the caption of the screen
-pygame.display.set_caption('cock')
+pygame.display.set_caption('GHF-window')
 
-# Fill the background colour to the screen
 screen.fill(background_colour)
 
-# Update the display using flip
 pygame.display.flip()
 clicked = False
-# Variable to keep our game loop running
 running = True
+trigger = True
 mp = (0, 0)
-# Initialing Color
-color = (0,255,0)
-def button(x, y, width, height, chekerboard):
+def button(text = "hello",x=600, y=30, width=60, height=30, font_size=35,curve = 8, outline = 1 ,color = (0, 200, 0), hover = (0, 250, 0), cli = (0, 100, 0)):
+    global trigger
+    font1 = pygame.font.Font('Smokind-lg2Kd.otf', font_size)
+    text1 = font1.render(text, True, (255, 255, 255))
+    text2 = font1.render(text, True, (0, 0, 0))
+    textRect1 = text1.get_rect()
+    textRect1.center = (x, y)
 
+    textRect2 = text1.get_rect()
+ 
     
+    textRect2.center = (x + outline, y + outline)
+    
+        
 
     
     if (mp[0] < x + width and mp[0] > x - width and mp[1] < y + height and mp[1] > y - height):
-        print("hi")
-        color = (255, 0, 0)
-        chekerColorT = (80, 80, 80)
-        chekerColor = (200, 200, 200)
-    else:
-        color = (0, 255, 0)
-        chekerColorT = (200, 200, 200)
-        chekerColor = (80, 80, 80)
-    if (not chekerboard):
-        pygame.draw.rect(screen, color, pygame.Rect(x - width, y - height, width, height))
-        pygame.draw.rect(screen, color, pygame.Rect(x, y, width, height))
-        pygame.draw.rect(screen, color, pygame.Rect(x, y - height, width, height))
-        pygame.draw.rect(screen, color, pygame.Rect(x - width, y, width, height))
-        pygame.display.flip()
-    if (chekerboard):
-        pygame.draw.rect(screen, chekerColor, pygame.Rect(x - width, y - height, width, height), 5)
-        pygame.draw.rect(screen, chekerColor, pygame.Rect(x, y, width, height), 5)
-        pygame.draw.rect(screen, chekerColorT, pygame.Rect(x, y - height, width, height), 5)
-        pygame.draw.rect(screen, chekerColorT, pygame.Rect(x - width, y, width, height), 5)
-        pygame.display.flip()
+        color = hover
+        if clicked:
+            color = cli
+        
+
+    pygame.draw.rect(screen, color, pygame.Rect(x-width, y-height, width * 2, height* 2), 0, curve)
+    pygame.draw.rect(screen, (0), pygame.Rect(x-width, y-height, width * 2, height* 2), outline, curve)
+        
+    screen.blit(text2, textRect2)
+    screen.blit(text1, textRect1)
+    pygame.display.flip()
+    #logic
+    if (mp[0] < x + width and mp[0] > x - width and mp[1] < y + height and mp[1] > y - height):
+        if clicked:
+            
+            trigger = False
+            return False
+        if not clicked and trigger == False:
+            if trigger:
+                return
+
+                # do something
+
+            trigger = True
+            return True
+
+            
+        
+        #if not clicked and t == True:
+
+
+    
+    
 # game loop
 while running:
     mp = pygame.mouse.get_pos()
-    #print(mp[0])
-    button(144, 202, 20, 80, False)
+    if (button()):
+        print("test")
     pos = pygame.mouse.get_pos()
-# for loop through the event queue
     for event in pygame.event.get():
-        # handle MOUSEBUTTONUP
         if event.type == pygame.MOUSEBUTTONDOWN:
-            print("click")
-        # Check for QUIT event  
+            clicked = True
+        elif event.type == pygame.MOUSEBUTTONUP:
+            clicked = False
         if event.type == pygame.QUIT:
             running = False
