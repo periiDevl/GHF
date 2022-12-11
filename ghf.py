@@ -30,7 +30,18 @@ mp = (0, 0)
 def button(text = "hello",x=600, y=30, width=60, height=30, font_size=45,curve = 5, 
     outline = 1 ,color = (0, 200, 0), hover = (0, 230, 0), cli = (0, 130, 0), 
     state_amount = 20, img = "caliber.png", imgCLI = "3.jpg", imgeHover = "3.jpg",
-    image = True):
+    image = True, draw = True, scene = 0, drawScene = 0):
+    if scene != drawScene:
+        draw = False
+    if draw == False:
+        color = background_colour
+        hover = background_colour
+        imgCLI = background_colour
+        image = False
+        text = " "
+        outline = 0
+        curve = 0
+
     if image:
         picture = pygame.image.load(img).convert_alpha()
         picture = pygame.transform.scale(picture, (width * 2, height * 2))
@@ -60,7 +71,8 @@ def button(text = "hello",x=600, y=30, width=60, height=30, font_size=45,curve =
             if image:
                 picture = pygame.image.load(imgCLI).convert_alpha()
                 picture = pygame.transform.scale(picture, (width * 2, height * 2))
-    
+
+
     pygame.draw.rect(screen, color, pygame.Rect(x-width, y-height, width * 2, height* 2), 0, curve)
     pygame.draw.rect(screen, (0), pygame.Rect(x-width, y-height, width * 2, height* 2), outline, curve)
     if image:
@@ -70,10 +82,12 @@ def button(text = "hello",x=600, y=30, width=60, height=30, font_size=45,curve =
     screen.blit(text2, textRect2)
     screen.blit(text1, textRect1)
     pygame.display.flip()
+
+
     
         
     #logic
-    if (mp[0] < x + width and mp[0] > x - width and mp[1] < y + height and mp[1] > y - height):
+    if (mp[0] < x + width and mp[0] > x - width and mp[1] < y + height and mp[1] > y - height and draw == True):
         if clicked:
             
             trigger = False
@@ -92,13 +106,12 @@ def button(text = "hello",x=600, y=30, width=60, height=30, font_size=45,curve =
         #if not clicked and t == True:
 
 
-    
-    
+scene = 0
 # game loop
 while running:
     mp = pygame.mouse.get_pos()
     if (button(text = "GAMES",x = 250 / 2 + 10, height = 135, y = 150, width = 125, color = (0, 0, 0), hover = (0, 0, 0), cli = (0, 0, 0),
-            img = "games.png", imgeHover = "gameshover.png", imgCLI ="gamesclick.png"
+            img = "games.png", imgeHover = "gameshover.png", imgCLI ="gamesclick.png", scene = scene, drawScene = 0
             )):
             print("test")
 
@@ -106,6 +119,7 @@ while running:
             img = "caliberLogo.jpg", imgeHover = "caliberLogoHover.jpg", imgCLI = "caliberLogoClick.jpg",
             )):
             print("caliber")
+            scene = 1
             
 
     if (button(text = "ECHO",x = 1250 / 2 + 30, height = 135, y = 150, width = 125,
