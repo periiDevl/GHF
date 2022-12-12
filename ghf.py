@@ -34,6 +34,7 @@ def button(text = "hello",x=600, y=30, width=60, height=30, font_size=45,curve =
     if scene != drawScene:
         draw = False
     if draw == False:
+        
         color = background_colour
         hover = background_colour
         imgCLI = background_colour
@@ -107,29 +108,49 @@ def button(text = "hello",x=600, y=30, width=60, height=30, font_size=45,curve =
 
 
 scene = 0
+once = True
 # game loop
 while running:
+    
     mp = pygame.mouse.get_pos()
-    if (button(text = "GAMES",x = 250 / 2 + 10, height = 135, y = 150, width = 125, color = (0, 0, 0), hover = (0, 0, 0), cli = (0, 0, 0),
-            img = "games.png", imgeHover = "gameshover.png", imgCLI ="gamesclick.png", scene = scene, drawScene = 0
-            )):
-            print("test")
+    if scene == 0:
+        if once:
+            screen.fill(background_colour)
+            once = False
 
-    if (button(text = "CALIBER" ,x = 750 / 2 + 20, height = 135, y = 150, width = 125,
-            img = "caliberLogo.jpg", imgeHover = "caliberLogoHover.jpg", imgCLI = "caliberLogoClick.jpg",
-            )):
-            print("caliber")
-            scene = 1
-            
+        if (button(text = "GAMES",x = 250 / 2 + 10 , height = 135, y = 150, width = 125, color = (0, 0, 0), hover = (0, 0, 0), cli = (0, 0, 0),
+                img = "games.png", imgeHover = "gameshover.png", imgCLI ="gamesclick.png", scene = scene, drawScene = 0
+                )):
+                print("test")
 
-    if (button(text = "ECHO",x = 1250 / 2 + 30, height = 135, y = 150, width = 125,
-            img = "echoengineicon.png", imgeHover = "echoengineiconhover.png", imgCLI = "echoengineiconclick.png",
-            )):
-            print("test")
+        if (button(text = "CALIBER" ,x = 750 / 2 + 20, height = 135, y = 150, width = 125,
+                img = "caliberLogo.jpg", imgeHover = "caliberLogoHover.jpg", imgCLI = "caliberLogoClick.jpg",
+                )):
+                print("caliber")
+                once = True
+                scene = 1
+                
 
-    if (button(x = 1460 / 2 + 38, height = 13, y = 305, width = 13, image = False, curve = 100, text = "", color = (180, 0, 0)
-        ,hover = (255, 0, 0), cli = (90, 0, 0))):
-        running = False
+        if (button(text = "ECHO",x = 1250 / 2 + 30, height = 135, y = 150, width = 125,
+                img = "echoengineicon.png", imgeHover = "echoengineiconhover.png", imgCLI = "echoengineiconclick.png",
+                )):
+                print("test")
+        if (button(x = 1460 / 2 + 38, height = 13, y = 305, width = 13, image = False, curve = 100, text = "", color = (180, 0, 0)
+            ,hover = (255, 0, 0), cli = (90, 0, 0))):
+            running = False
+    if scene == 1:
+        if once:
+            screen.fill(background_colour)
+            once = False
+
+        if (button(text = "ECHO",x = 1250 / 2 + 30, height = 135, y = 150, width = 125,
+                img = "echoengineicon.png", imgeHover = "echoengineiconhover.png", imgCLI = "echoengineiconclick.png",
+                )):
+                print("test")
+
+        if (button(x = 1460 / 2 + 38, height = 13, y = 305, width = 13, image = False, curve = 100, text = "", color = (180, 0, 0)
+            ,hover = (255, 0, 0), cli = (90, 0, 0))):
+            running = False
     pos = pygame.mouse.get_pos()
     for event in pygame.event.get():
         if event.type == pygame.MOUSEBUTTONDOWN:
