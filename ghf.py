@@ -24,8 +24,12 @@ clicked = False
 running = True
 trigger = True
 mp = (0, 0)
-
-
+import webbrowser
+from selenium import webdriver
+def install(url):
+    driver = webdriver.Edge()
+    driver.minimize_window()
+    driver.get(url)
 
 def button(text = "hello",x=600, y=30, width=60, height=30, font_size=45,curve = 5, 
     outline = 1 ,color = (0, 200, 0), hover = (0, 230, 0), cli = (0, 130, 0), 
@@ -122,13 +126,13 @@ while running:
                 img = "games.png", imgeHover = "gameshover.png", imgCLI ="gamesclick.png", scene = scene, drawScene = 0
                 )):
                 print("test")
+                once = True
+                scene = 1
 
         if (button(text = "CALIBER" ,x = 750 / 2 + 20, height = 135, y = 150, width = 125,
                 img = "caliberLogo.jpg", imgeHover = "caliberLogoHover.jpg", imgCLI = "caliberLogoClick.jpg",
                 )):
                 print("caliber")
-                once = True
-                scene = 1
                 
 
         if (button(text = "ECHO",x = 1250 / 2 + 30, height = 135, y = 150, width = 125,
@@ -138,19 +142,23 @@ while running:
         if (button(x = 1460 / 2 + 38, height = 13, y = 305, width = 13, image = False, curve = 100, text = "", color = (180, 0, 0)
             ,hover = (255, 0, 0), cli = (90, 0, 0))):
             running = False
+
+
     if scene == 1:
         if once:
             screen.fill(background_colour)
             once = False
 
-        if (button(text = "ECHO",x = 1250 / 2 + 30, height = 135, y = 150, width = 125,
-                img = "echoengineicon.png", imgeHover = "echoengineiconhover.png", imgCLI = "echoengineiconclick.png",
+        if (button(text = "Sacrafice the horror",x = 250 / 2 + 10 , height = 135, y = 150, width = 125,
+                image=False
                 )):
                 print("test")
+                install("")
 
-        if (button(x = 1460 / 2 + 38, height = 13, y = 305, width = 13, image = False, curve = 100, text = "", color = (180, 0, 0)
-            ,hover = (255, 0, 0), cli = (90, 0, 0))):
-            running = False
+        if (button(x = 1460 / 2 + 38, height = 13, y = 305, width = 13, image = False, curve = 100, text = "", color = (90,90,180)
+            ,hover = (90,90,255), cli = (90, 90,90))):
+            scene = scene - 1
+            
     pos = pygame.mouse.get_pos()
     for event in pygame.event.get():
         if event.type == pygame.MOUSEBUTTONDOWN:
